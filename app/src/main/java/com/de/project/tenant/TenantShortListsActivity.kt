@@ -1,5 +1,6 @@
 package com.de.project.tenant
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.de.project.databinding.ActivityTenantShortListsBinding
 import com.de.project.models.Property
 import com.de.project.models.ShortListProperty
 import com.de.project.properties
+import com.de.project.property.ViewPropertyActivity
 import com.de.project.shortlists
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -39,7 +41,7 @@ class TenantShortListsActivity : AppCompatActivity() {
             val gson = Gson()
             val typeToken = object : TypeToken<MutableList<ShortListProperty>>(){}.type
             shortlists = gson.fromJson<MutableList<ShortListProperty>>(tenantShortListFromSp,typeToken)
-            val adapter: ShortListPropertyAdapter = ShortListPropertyAdapter(shortlists) { pos ->
+            val adapter: ShortListPropertyAdapter = ShortListPropertyAdapter(shortlists, {pos -> onRowClick(pos)}) { pos ->
                 deleteBtnClickHandler(pos)
             }
             this.binding.rvShortListProperties.adapter = adapter
@@ -54,6 +56,12 @@ class TenantShortListsActivity : AppCompatActivity() {
 
 
         setContentView(this.binding.root)
+    }
+
+    private fun onRowClick(position: Int) {
+        var intent = Intent(this@TenantShortListsActivity, TenantViewShortListPropertyActivity::class.java)
+        intent.putExtra("EXTRA_ID", shortlists[position].id)
+        startActivity(intent)
     }
 
     private fun deleteBtnClickHandler(position: Int) {

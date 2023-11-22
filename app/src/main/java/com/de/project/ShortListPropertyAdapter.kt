@@ -9,11 +9,15 @@ import com.de.project.models.ShortListProperty
 
 
 class ShortListPropertyAdapter(var items:List<ShortListProperty>,
+   private val rowClickHandler: (Int) -> Unit,
    private val deleteBtnClickHandler: (Int) -> Unit
 ) : RecyclerView.Adapter<ShortListPropertyAdapter.PropertyViewHolder>(){
     inner class PropertyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
     {
         init {
+            itemView.setOnClickListener{
+                rowClickHandler(adapterPosition)
+            }
             val btnDelete =
                 itemView.findViewById<Button>(R.id.btnRemoveFromShortList)
             btnDelete.setOnClickListener {

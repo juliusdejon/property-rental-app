@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".tenant.TenantViewShortListPropertyActivity">
+
+<LinearLayout
+    android:layout_margin="16dp"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/propertyAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Address "
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/propertyCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="City: " />
+
+    <TextView
+        android:id="@+id/propertyPostal"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:text="Postal Code: " />
+
+    <TextView
+        android:id="@+id/propertyType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Type: " />
+
+    <TextView
+        android:id="@+id/propertySpecs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Specs: " />
+
+    <TextView
+        android:id="@+id/propertyDesc"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:text="Desc: " />
+
+
+    <TextView
+        android:id="@+id/propertyContactPerson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Contact" />
+
+    <TextView
+        android:id="@+id/propertyContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Contact" />
+
+    <TextView
+        android:id="@+id/propertyAvailability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Availablity "
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>
+
+</LinearLayout>
