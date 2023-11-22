@@ -2,19 +2,23 @@ package com.de.project
 
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.View.OnClickListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.de.project.landlord.LandlordLoginActivity
 import com.de.project.databinding.ActivityMainBinding
+import com.de.project.landlord.LandlordLoginActivity
 import com.de.project.models.Property
+import com.de.project.property.ViewPropertyActivity
 import com.de.project.tenant.TenantLoginActivity
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+
 
 var properties = mutableListOf<Property>()
 
@@ -26,14 +30,12 @@ class MainActivity : AppCompatActivity(),OnClickListener {
     lateinit var sharedPreferences: SharedPreferences
     lateinit var prefEditor: SharedPreferences.Editor
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.binding = ActivityMainBinding.inflate(layoutInflater)
         this.sharedPreferences= getSharedPreferences("MY_APP_PREFS", MODE_PRIVATE)
         this.prefEditor = this.sharedPreferences.edit()
-
-
+        setSupportActionBar(this.binding.menuToolbar)
 
         val propertiesFromSP = sharedPreferences.getString("KEY_PROPERTIES","")
         if (propertiesFromSP!= "")
@@ -42,9 +44,6 @@ class MainActivity : AppCompatActivity(),OnClickListener {
             val typeToken = object : TypeToken<MutableList<Property>>(){}.type
             properties = gson.fromJson<MutableList<Property>>(propertiesFromSP,typeToken)
         }
-
-
-
 
         val adapter:PropertyAdapter = PropertyAdapter(properties) { pos -> rowClicked(pos) }
         this.binding.rvProperties.adapter=adapter
@@ -58,19 +57,32 @@ class MainActivity : AppCompatActivity(),OnClickListener {
         this.binding.btnSearch.setOnClickListener(this)
         this.binding.btnLandlord.setOnClickListener(this)
 
-
-
         setContentView(this.binding.root)
     }
 
     fun rowClicked(position: Int)
     {
         if(properties.size > 0) {
-            var intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
-            intent.putExtra("EXTRA_ID", properties[position].id)
-            startActivity(intent)
+            val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
+            if(isLoggedIn == "true") {
+                var intent = Intent(this@MainActivity, ViewPropertyActivity::class.java)
+                intent.putExtra("EXTRA_ID", properties[position].id)
+                startActivity(intent)
+            } else {
+                var intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
+                intent.putExtra("EXTRA_ID", properties[position].id)
+                startActivity(intent)
+            }
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
+
+        if (isLoggedIn == "true") {
+            menuInflater.inflate(R.menu.menu_options, menu)
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onClick(v: View?) {
@@ -109,5 +121,27 @@ class MainActivity : AppCompatActivity(),OnClickListener {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.menu_item_short_listed_lists-> {
+//                var intent = Intent(this@MainActivity, HistoryActivity::class.java)
+//                startActivity(intent)
+                return true
+            }
+            R.id.menu_logout-> {
+                this.prefEditor.putString("KEY_IS_LOGGED_IN", "false")
+                this.prefEditor.apply()
+                recreate()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+
+        // Invalidate the options menu to trigger a recreation
+        invalidateOptionsMenu() // or supportInvalidateOptionsMenu() for AppCompatActivity
+    }
 
 }

@@ -14,7 +14,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
-
     private lateinit var binding: ActivityTenantLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     lateinit var prefEditor: SharedPreferences.Editor
@@ -63,13 +62,19 @@ class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
                 val tenantsList = gson.fromJson<MutableList<Tenant>>(tenantsListFromSP, typeToken)
 
                 var alreadyExists = false
+                var tenantId: String? = null
                 for (tenant in tenantsList ) {
                     if(tenant.email == etName && tenant.password == etPassword) {
                         alreadyExists = true
+                        tenantId = tenant.id
                     }
                 }
                 if (alreadyExists) {
                     Snackbar.make(binding.root, "Successfully login", Snackbar.LENGTH_LONG).show()
+                    this.prefEditor.putString("KEY_IS_LOGGED_IN", "true")
+                    this.prefEditor.putString("KEY_TENANT_ID", tenantId)
+                    this.prefEditor.apply()
+                    supportInvalidateOptionsMenu()
                     var intent = Intent(this@TenantLoginActivity, ViewPropertyActivity::class.java)
                     intent.putExtra("EXTRA_ID", id)
                     startActivity(intent)
