@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.de.project.landlord.LandlordLoginActivity
 import com.de.project.databinding.ActivityMainBinding
 import com.de.project.models.Property
+import com.de.project.tenant.TenantLoginActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -65,8 +66,9 @@ class MainActivity : AppCompatActivity(),OnClickListener {
 
     fun rowClicked(position: Int)
     {
-        val snackbar = Snackbar.make(this.binding.root,"clicked", Snackbar.LENGTH_LONG)
-        snackbar.show()
+        val intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
+        intent.putExtra("EXTRA_POSITION", position)
+        startActivity(intent)
     }
 
     override fun onClick(v: View?) {

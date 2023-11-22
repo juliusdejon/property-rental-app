@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31">
         <activity
+            android:name=".property.ViewPropertyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tenant.TenantSignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tenant.TenantLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tenant.TenantActivity"
+            android:exported="false" />
+        <activity
             android:name=".landlord.CreateLandlordActivity"
             android:exported="false" />
         <activity
