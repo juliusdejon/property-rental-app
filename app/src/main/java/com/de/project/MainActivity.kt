@@ -144,8 +144,8 @@ class MainActivity : AppCompatActivity(),OnClickListener {
                 this.prefEditor.putString("KEY_IS_LOGGED_IN", "false")
                 this.prefEditor.putString("KEY_TENANT_ID", null)
                 this.prefEditor.apply()
-                recreate()
                 Snackbar.make(binding.root, "Sucessfully Logged out", Snackbar.LENGTH_LONG).show()
+                recreate()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
