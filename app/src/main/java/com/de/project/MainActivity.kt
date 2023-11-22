@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.de.project.databinding.ActivityMainBinding
 import com.de.project.landlord.LandlordLoginActivity
 import com.de.project.models.Property
+import com.de.project.models.ShortListProperty
 import com.de.project.property.ViewPropertyActivity
 import com.de.project.tenant.TenantLoginActivity
 import com.google.gson.Gson
@@ -21,6 +22,7 @@ import com.google.gson.reflect.TypeToken
 
 
 var properties = mutableListOf<Property>()
+var shortlists = mutableListOf<ShortListProperty>()
 
 
 val typesList:List<String> = listOf("Condo","House","Apartment","Basement")
@@ -66,6 +68,7 @@ class MainActivity : AppCompatActivity(),OnClickListener {
             val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
             if(isLoggedIn == "true") {
                 var intent = Intent(this@MainActivity, ViewPropertyActivity::class.java)
+                Log.d("Huh", "${properties[position].id}")
                 intent.putExtra("EXTRA_ID", properties[position].id)
                 startActivity(intent)
             } else {
