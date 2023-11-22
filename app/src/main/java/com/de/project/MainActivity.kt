@@ -17,6 +17,8 @@ import com.de.project.models.Property
 import com.de.project.models.ShortListProperty
 import com.de.project.property.ViewPropertyActivity
 import com.de.project.tenant.TenantLoginActivity
+import com.de.project.tenant.TenantShortListsActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -127,14 +129,16 @@ class MainActivity : AppCompatActivity(),OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_item_short_listed_lists-> {
-//                var intent = Intent(this@MainActivity, HistoryActivity::class.java)
-//                startActivity(intent)
+                var intent = Intent(this@MainActivity, TenantShortListsActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.menu_logout-> {
                 this.prefEditor.putString("KEY_IS_LOGGED_IN", "false")
+                this.prefEditor.putString("KEY_TENANT_ID", null)
                 this.prefEditor.apply()
                 recreate()
+                Snackbar.make(binding.root, "Sucessfully Logged out", Snackbar.LENGTH_LONG).show()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

@@ -74,7 +74,6 @@ class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
                     this.prefEditor.putString("KEY_IS_LOGGED_IN", "true")
                     this.prefEditor.putString("KEY_TENANT_ID", tenantId)
                     this.prefEditor.apply()
-                    supportInvalidateOptionsMenu()
                     var intent = Intent(this@TenantLoginActivity, ViewPropertyActivity::class.java)
                     intent.putExtra("EXTRA_ID", id)
                     startActivity(intent)
