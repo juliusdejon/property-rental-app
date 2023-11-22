@@ -1,6 +1,7 @@
 package com.de.project.property
 
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -45,6 +46,33 @@ class ViewPropertyActivity : AppCompatActivity(), OnClickListener {
         }
         propertyId = intent.getStringExtra("EXTRA_ID")
         tenantId = tenantIdFromSP
+
+
+        //Leo
+        if (propertyId != "") {
+            for (i in properties) {
+                if (propertyId == i.id) {
+
+                    this.binding.propertyAddress.setText("${i.address}")
+                    this.binding.propertyCity.setText("${i.city}")
+                    this.binding.propertyPostal.setText("${i.postal}")
+                    this.binding.propertyType.setText("Type: ${i.type}")
+                    this.binding.propertySpecs.setText("${i.specs}")
+                    this.binding.propertyDesc.setText("Description: ${i.description}")
+                    if (i.available)
+                    {
+                        this.binding.propertyAvailability.setText("Available")
+                        this.binding.propertyAvailability.setTextColor(Color.rgb(1,100,32))
+                    }
+                    else
+                    {
+                        this.binding.propertyAvailability.setText("Unavailable")
+                        this.binding.propertyAvailability.setTextColor(Color.rgb(255,0,0))
+                    }
+                    this.binding.propertyContact.setText("Contact: ${i.owner} ${i.ownerContact}")
+                }
+            }
+        } //Leo
     }
     override fun onClick(v: View?) {
         when(v?.id){
