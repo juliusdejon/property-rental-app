@@ -64,9 +64,25 @@ class MainActivity : AppCompatActivity(),OnClickListener {
         setContentView(this.binding.root)
     }
 
+    //Leo
+    var searchedProperties = mutableListOf<Property>()
+    //Leo//
+
     fun rowClicked(position: Int)
     {
-        if(properties.size > 0) {
+        if(searchedProperties.size > 0) {
+            val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
+            if(isLoggedIn == "true") {
+                var intent = Intent(this@MainActivity, ViewPropertyActivity::class.java)
+                Log.d("Huh", "${properties[position].id}")
+                intent.putExtra("EXTRA_ID", searchedProperties[position].id)
+                startActivity(intent)
+            } else {
+                var intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
+                intent.putExtra("EXTRA_ID", searchedProperties[position].id)
+                startActivity(intent)
+            }
+        } else {
             val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
             if(isLoggedIn == "true") {
                 var intent = Intent(this@MainActivity, ViewPropertyActivity::class.java)
@@ -78,6 +94,7 @@ class MainActivity : AppCompatActivity(),OnClickListener {
                 intent.putExtra("EXTRA_ID", properties[position].id)
                 startActivity(intent)
             }
+
         }
     }
 
@@ -93,10 +110,12 @@ class MainActivity : AppCompatActivity(),OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id)
         {
+            //Leo
             R.id.btnSearch ->
             {
                 if (this.binding.etSearch.text.isNullOrEmpty())
                 {
+                    searchedProperties.clear()
                     this.binding.etSearch.setError("Cannot Be Empty")
                     val adapter:PropertyAdapter = PropertyAdapter(properties) { pos -> rowClicked(pos) }
                     this.binding.rvProperties.adapter=adapter
@@ -109,16 +128,18 @@ class MainActivity : AppCompatActivity(),OnClickListener {
 
                     for (property in properties)
                     {
-                        if (property.city == search || property.postal == search || property.address == search)
+                        if (property.city.contains(search) ||
+                            property.postal.contains(search) ||
+                            property.address.contains(search))
                         {
                             searchedProperties.add(property)
                         }
                     }
-
+                    this.searchedProperties = searchedProperties
                     val adapter:PropertyAdapter = PropertyAdapter(searchedProperties) { pos -> rowClicked(pos) }
                     this.binding.rvProperties.adapter=adapter
                 }
-            }
+            }//Leo//
             R.id.btnLandlord -> {
                 val intent = Intent(this@MainActivity, LandlordLoginActivity::class.java)
                 startActivity(intent)

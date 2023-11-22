@@ -1,17 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".property.ViewPropertyActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/propertyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address "
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/propertyCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City: " />
+
+        <TextView
+            android:id="@+id/propertyPostal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postal Code: " />
+
+        <TextView
+            android:id="@+id/propertyType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type: " />
+
+        <TextView
+            android:id="@+id/propertySpecs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Specs: " />
+
+        <TextView
+            android:id="@+id/propertyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Desc: " />
+
+
+        <TextView
+            android:id="@+id/propertyContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact" />
+
+        <TextView
+            android:id="@+id/propertyAvailability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Availablity "
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btnAddToShortList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add to shortlist"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="32dp"
-        />
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.de.project
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,10 +44,12 @@ class PropertyAdapter(var items:List<Property>,private val rowClickHandler: (Int
         if (property.available)
         {
             tvAvailable.setText("Available")
+            tvAvailable.setTextColor(Color.rgb(1,100,32))
         }
         else
         {
             tvAvailable.setText("Unavailable")
+            tvAvailable.setTextColor(Color.rgb(255,0,0))
         }
 
 
