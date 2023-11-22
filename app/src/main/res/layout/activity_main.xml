@@ -11,8 +11,8 @@
         android:id="@+id/menu_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/white"
-        android:background="#2196F3"
+        app:titleTextColor="@color/black"
+        android:background="#F2E9FF"
     />
     <!--    Seach Bar Layout-->
     <LinearLayout
