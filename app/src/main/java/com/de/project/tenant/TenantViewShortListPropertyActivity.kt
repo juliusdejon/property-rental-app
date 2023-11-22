@@ -48,9 +48,8 @@ class TenantViewShortListPropertyActivity : AppCompatActivity() {
                     if (propertyId == i.id) {
 
                         this.binding.propertyAddress.setText("${i.address}")
-                        this.binding.propertyCity.setText("City: ${i.city}")
-                        this.binding.propertyPostal.setText("Postal Code: ${i.postal}")
                         this.binding.propertyType.setText("Type: ${i.type}")
+                        this.binding.propertyCity.setText("${i.city}, ${i.postal}")
                         this.binding.propertySpecs.setText("Specifications: ${i.specs}")
                         this.binding.propertyDesc.setText("Description: ${i.description}")
                         if (i.available)
@@ -63,12 +62,30 @@ class TenantViewShortListPropertyActivity : AppCompatActivity() {
                             this.binding.propertyAvailability.setText("Unavailable")
                             this.binding.propertyAvailability.setTextColor(Color.rgb(255,0,0))
                         }
-                        this.binding.propertyContactPerson.setText("Contact: ${i.owner}")
-                        this.binding.propertyContact.setText("Contact number: ${i.ownerContact}")
+                        this.binding.propertyContact.setText("Contact: ${i.owner} ${i.ownerContact}")
 
+                        if (i.type == "House") {
+                            val imagename = "house"
+                            val res = resources.getIdentifier(imagename, "drawable", this.packageName)
+                            this.binding.typeImage.setImageResource(res)
+                        } else if (i.type == "Condo") {
+                            val imagename = "condo"
+                            val res = resources.getIdentifier(imagename, "drawable", this.packageName)
+                            this.binding.typeImage.setImageResource(res)
+
+                        } else if (i.type == "Apartment") {
+                            val imagename = "apartment"
+                            val res = resources.getIdentifier(imagename, "drawable", this.packageName)
+                            this.binding.typeImage.setImageResource(res)
+
+                        } else if (i.type == "Basement") {
+                            val imagename = "basement"
+                            val res = resources.getIdentifier(imagename, "drawable", this.packageName)
+                            this.binding.typeImage.setImageResource(res)
+                        }
                     }
                 }
-            }
+            } //Leo
         }
 
     }
