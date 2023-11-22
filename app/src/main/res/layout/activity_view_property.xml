@@ -78,7 +78,7 @@
             android:layout_height="200dp"
             android:src="@drawable/house"
             android:layout_marginTop="10dp"
-
+            android:layout_gravity="center"
             />
 
         <View
