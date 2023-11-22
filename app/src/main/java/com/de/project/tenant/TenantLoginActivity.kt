@@ -18,6 +18,7 @@ class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityTenantLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     lateinit var prefEditor: SharedPreferences.Editor
+    var id: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,7 @@ class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
         this.sharedPreferences = getSharedPreferences("MY_APP_PREFS", MODE_PRIVATE)
         this.prefEditor = this.sharedPreferences.edit()
 
+        id = intent.getStringExtra("EXTRA_ID")
     }
 
     override fun onClick(v: View?) {
@@ -68,7 +70,8 @@ class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 if (alreadyExists) {
                     Snackbar.make(binding.root, "Successfully login", Snackbar.LENGTH_LONG).show()
-                    val intent = Intent(this@TenantLoginActivity, ViewPropertyActivity::class.java)
+                    var intent = Intent(this@TenantLoginActivity, ViewPropertyActivity::class.java)
+                    intent.putExtra("EXTRA_ID", id)
                     startActivity(intent)
                 } else {
                     Snackbar.make(binding.root, "Invalid username or password", Snackbar.LENGTH_LONG).show()

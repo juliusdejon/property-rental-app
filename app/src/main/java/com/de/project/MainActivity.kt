@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity(),OnClickListener {
 
 
 
-
         val adapter:PropertyAdapter = PropertyAdapter(properties) { pos -> rowClicked(pos) }
         this.binding.rvProperties.adapter=adapter
         this.binding.rvProperties.layoutManager = LinearLayoutManager(this)
@@ -66,9 +65,12 @@ class MainActivity : AppCompatActivity(),OnClickListener {
 
     fun rowClicked(position: Int)
     {
-        val intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
-        intent.putExtra("EXTRA_POSITION", position)
-        startActivity(intent)
+        if(properties.size > 0) {
+            var intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
+            intent.putExtra("EXTRA_ID", properties[position].id)
+            startActivity(intent)
+        }
+
     }
 
     override fun onClick(v: View?) {
