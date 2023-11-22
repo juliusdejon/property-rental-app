@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.ArrayAdapter
+import com.de.project.PropertyAdapter
 import com.de.project.R
 import com.de.project.databinding.ActivityCreatePropertyBinding
 import com.de.project.models.Landlord

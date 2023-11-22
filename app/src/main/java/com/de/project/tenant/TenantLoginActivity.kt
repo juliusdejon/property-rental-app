@@ -12,6 +12,7 @@ import com.de.project.property.ViewPropertyActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.delay
 
 class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityTenantLoginBinding
@@ -70,13 +71,12 @@ class TenantLoginActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 }
                 if (alreadyExists) {
-                    Snackbar.make(binding.root, "Successfully login", Snackbar.LENGTH_LONG).show()
                     this.prefEditor.putString("KEY_IS_LOGGED_IN", "true")
                     this.prefEditor.putString("KEY_TENANT_ID", tenantId)
                     this.prefEditor.apply()
-                    var intent = Intent(this@TenantLoginActivity, ViewPropertyActivity::class.java)
-                    intent.putExtra("EXTRA_ID", id)
-                    startActivity(intent)
+                    Snackbar.make(binding.root, "Successfully login. You can now add to short list", Snackbar.LENGTH_INDEFINITE)
+                        .show()
+                    finishAfterTransition()
                 } else {
                     Snackbar.make(binding.root, "Invalid username or password", Snackbar.LENGTH_LONG).show()
                 }

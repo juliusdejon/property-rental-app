@@ -70,33 +70,19 @@ class MainActivity : AppCompatActivity(),OnClickListener {
 
     fun rowClicked(position: Int)
     {
-        if(searchedProperties.size > 0) {
-            val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
-            if(isLoggedIn == "true") {
+        if(properties.size > 0) {
+            if (searchedProperties.size > 0) {
                 var intent = Intent(this@MainActivity, ViewPropertyActivity::class.java)
-                Log.d("Huh", "${properties[position].id}")
                 intent.putExtra("EXTRA_ID", searchedProperties[position].id)
                 startActivity(intent)
             } else {
-                var intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
-                intent.putExtra("EXTRA_ID", searchedProperties[position].id)
-                startActivity(intent)
-            }
-        } else {
-            val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
-            if(isLoggedIn == "true") {
                 var intent = Intent(this@MainActivity, ViewPropertyActivity::class.java)
-                Log.d("Huh", "${properties[position].id}")
-                intent.putExtra("EXTRA_ID", properties[position].id)
-                startActivity(intent)
-            } else {
-                var intent = Intent(this@MainActivity, TenantLoginActivity::class.java)
                 intent.putExtra("EXTRA_ID", properties[position].id)
                 startActivity(intent)
             }
-
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val isLoggedIn = sharedPreferences.getString("KEY_IS_LOGGED_IN", "false")
