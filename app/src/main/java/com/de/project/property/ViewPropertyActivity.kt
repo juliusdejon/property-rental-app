@@ -126,7 +126,7 @@ class ViewPropertyActivity : AppCompatActivity(), OnClickListener {
                             }
                         }
                         if (alreadyExists == true) {
-                            Snackbar.make(binding.root, "You already added this to Short List", Snackbar.LENGTH_LONG)
+                            Snackbar.make(binding.root, "Already added", Snackbar.LENGTH_LONG)
                                 .show()
                         } else {
                             if (property != null) {
@@ -152,7 +152,7 @@ class ViewPropertyActivity : AppCompatActivity(), OnClickListener {
                                 this.prefEditor.apply()
                                 Snackbar.make(
                                     binding.root,
-                                    "Successfully Updated Short List",
+                                    "Successfully Updated",
                                     Snackbar.LENGTH_LONG
                                 ).show()
                             }
@@ -180,7 +180,7 @@ class ViewPropertyActivity : AppCompatActivity(), OnClickListener {
                                 propertiesAsString
                             )
                             this.prefEditor.apply()
-                            Snackbar.make(binding.root, "Successfully Added to Short List", Snackbar.LENGTH_LONG)
+                            Snackbar.make(binding.root, "Successfully Added", Snackbar.LENGTH_LONG)
                                 .show()
                         }
                     }
